@@ -18,55 +18,58 @@ struct ContentView: View {
   }
 
   var body: some View {
-    ScrollView {
-      VStack {
-        ForEach(vm.guesses, id: \.self) { guess in
-          HStack {
-            ForEach(0 ..< guess.count, id: \.self) { index in
-              Text(guess[index])
-                .font(.headline)
-                .padding()
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .background(vm.getColorForLetter(guess[index], index))
-                .cornerRadius(10)
-            }
-          }
-          .padding()
-        }
-        
-        Text("\(vm.remainingAttempts) attempts remaining")
-
-        HStack {
-          TextField("", text: $currentGuess)
-            .font(.headline)
-            .frame(height: 55)
-            .frame(maxWidth: .infinity)
-            .background(Color(red: 60/255, green: 60/255, blue: 60/255))
-            .cornerRadius(10)
-            .padding(.horizontal)
-            .multilineTextAlignment(.center)
-            .onReceive(Just(currentGuess)) { value in
-              if value.count > 5 {
-                currentGuess.removeLast()
-              } else {
-                currentGuess = currentGuess.uppercased()
+    VStack {
+      ScrollView {
+        VStack {
+          ForEach(vm.guesses, id: \.self) { guess in
+            HStack {
+              ForEach(0 ..< guess.count, id: \.self) { index in
+                Text(guess[index])
+                  .font(.headline)
+                  .padding()
+                  .frame(minWidth: 0, maxWidth: .infinity)
+                  .background(vm.getColorForLetter(guess[index], index))
+                  .cornerRadius(10)
               }
             }
+            .padding()
+          }
         }
-        
-        Button("Check Answer") {
-          vm.checkWord(currentGuess)
-          currentGuess = ""
-        }
-        .font(.headline)
-        .foregroundColor(.white)
-        .frame(height: 55)
-        .frame(maxWidth: .infinity)
-        .background(.teal)
-        .cornerRadius(10)
-        .padding()
-        .disabled(isGuessValid(currentGuess))
       }
+      
+      Text("\(vm.remainingAttempts) attempts remaining")
+
+      HStack {
+        TextField("Type your 5 letter guess here", text: $currentGuess)
+          .font(.headline)
+          .frame(height: 55)
+          .frame(maxWidth: .infinity)
+          .background(Color(red: 60/255, green: 60/255, blue: 60/255))
+          .cornerRadius(10)
+          .padding(.horizontal)
+          .multilineTextAlignment(.center)
+          .onReceive(Just(currentGuess)) { value in
+            if value.count > 5 {
+              currentGuess.removeLast()
+            } else {
+              currentGuess = currentGuess.uppercased()
+            }
+          }
+      }
+      
+      Button("Check Answer") {
+        vm.checkWord(currentGuess)
+        currentGuess = ""
+      }
+      .font(.headline)
+      .foregroundColor(.white)
+      .frame(height: 55)
+      .frame(maxWidth: .infinity)
+      .background(.teal)
+      .cornerRadius(10)
+      .padding(.horizontal)
+      .padding(.bottom, 10)
+      .disabled(isGuessValid(currentGuess))
     }.preferredColorScheme(.dark)
   }
 }
