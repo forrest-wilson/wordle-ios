@@ -65,7 +65,7 @@ struct ContentView: View {
         .font(.headline)
         .foregroundColor(.white)
         .frame(height: 55)
-        .frame(maxWidth: .infinity)
+        .padding(.horizontal)
         .background(.teal)
         .cornerRadius(10)
         .disabled(isGuessValid(currentGuess))
