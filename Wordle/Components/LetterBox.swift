@@ -10,17 +10,19 @@ import SwiftUI
 struct LetterBox: View {
   var text: String
   var color: Color?
+  var borderColor: Color = .white
 
   var body: some View {
     Text(text)
       .font(.headline)
       .padding()
       .frame(minWidth: 0, maxWidth: .infinity)
+      .frame(height: 60)
       .background(color)
       .cornerRadius(10)
       .overlay(
         RoundedRectangle(cornerRadius: 10)
-          .stroke(.white, lineWidth: 1)
+          .stroke(borderColor, lineWidth: 1)
       )
   }
 }
