@@ -47,6 +47,8 @@ class WordleViewModel: ObservableObject {
       return
     }
     
+    // TODO: Stop word from being added to guess list if remainingAttempts is less than 1
+    
     remainingAttempts -= 1
     guesses.append(word)
     

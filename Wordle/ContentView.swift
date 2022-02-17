@@ -24,12 +24,7 @@ struct ContentView: View {
           ForEach(vm.guesses, id: \.self) { guess in
             HStack {
               ForEach(0 ..< guess.count, id: \.self) { index in
-                Text(guess[index])
-                  .font(.headline)
-                  .padding()
-                  .frame(minWidth: 0, maxWidth: .infinity)
-                  .background(vm.getColorForLetter(guess[index], index))
-                  .cornerRadius(10)
+                LetterBox(text: guess[index], color: vm.getColorForLetter(guess[index], index))
               }
             }
             .padding()
