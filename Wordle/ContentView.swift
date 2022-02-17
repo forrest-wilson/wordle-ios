@@ -26,7 +26,9 @@ struct ContentView: View {
               ForEach(0 ..< guess.count, id: \.self) { index in
                 LetterBox(text: guess[index], color: vm.getColorForLetter(guess[index], index))
               }
-            }.padding()
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 5)
           }
           
           ForEach(0 ..< vm.remainingAttempts, id: \.self) { int in
@@ -35,7 +37,8 @@ struct ContentView: View {
                 LetterBox(text: "", borderColor: .gray)
               }
             }
-            .padding()
+            .padding(.horizontal)
+            .padding(.vertical, 5)
           }
         }
       }
@@ -43,7 +46,7 @@ struct ContentView: View {
       Text("\(vm.remainingAttempts) attempts remaining")
       
       HStack {
-        TextField("Type here", text: $currentGuess)
+        TextField("Type guess here", text: $currentGuess)
           .font(.headline)
           .frame(height: 55)
           .frame(maxWidth: .infinity)
@@ -69,8 +72,10 @@ struct ContentView: View {
         .background(.teal)
         .cornerRadius(10)
         .disabled(isGuessValid(currentGuess))
-      }.padding()
-    }.preferredColorScheme(.dark)
+      }
+      .padding([.horizontal, .bottom])
+    }
+    .preferredColorScheme(.dark)
   }
 }
 
