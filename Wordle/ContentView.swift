@@ -69,7 +69,7 @@ struct ContentView: View {
         .foregroundColor(.white)
         .frame(height: 55)
         .padding(.horizontal)
-        .background(.teal)
+        .background(.green)
         .cornerRadius(10)
         .disabled(isGuessValid(currentGuess))
       }
