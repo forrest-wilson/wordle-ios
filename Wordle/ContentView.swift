@@ -21,13 +21,20 @@ struct ContentView: View {
     VStack {
       ScrollView {
         VStack {
-          ForEach(vm.guesses, id: \.self) { guess in
+          if vm.guesses.count < 1 {
             HStack {
-              ForEach(0 ..< guess.count, id: \.self) { index in
-                LetterBox(text: guess[index], color: vm.getColorForLetter(guess[index], index))
+              ForEach(0 ..< 5, id: \.self) { index in
+                LetterBox(text: "")
               }
+            }.padding()
+          } else {
+            ForEach(vm.guesses, id: \.self) { guess in
+              HStack {
+                ForEach(0 ..< guess.count, id: \.self) { index in
+                  LetterBox(text: guess[index], color: vm.getColorForLetter(guess[index], index))
+                }
+              }.padding()
             }
-            .padding()
           }
         }
       }

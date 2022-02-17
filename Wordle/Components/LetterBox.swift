@@ -18,11 +18,16 @@ struct LetterBox: View {
       .frame(minWidth: 0, maxWidth: .infinity)
       .background(color)
       .cornerRadius(10)
+      .overlay(
+        RoundedRectangle(cornerRadius: 10)
+          .stroke(.white, lineWidth: 1)
+      )
   }
 }
 
 struct LetterBox_Previews: PreviewProvider {
   static var previews: some View {
-    LetterBox(text: "Default Text", color: .blue)
+    LetterBox(text: "Default Text", color: .clear)
+      .preferredColorScheme(.dark)
   }
 }

@@ -13,7 +13,7 @@ class WordleViewModel: ObservableObject {
   @Published var randomWord: String?
   @Published var remainingAttempts: Int = 5
   
-  @Published public var guesses: [String] = [""]
+  @Published public var guesses: [String] = []
   
   init() {
     self.loadWordList()
