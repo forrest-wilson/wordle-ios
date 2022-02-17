@@ -41,15 +41,14 @@ struct ContentView: View {
       }
       
       Text("\(vm.remainingAttempts) attempts remaining")
-
+      
       HStack {
-        TextField("Type your 5 letter guess here", text: $currentGuess)
+        TextField("Type here", text: $currentGuess)
           .font(.headline)
           .frame(height: 55)
           .frame(maxWidth: .infinity)
           .background(Color(red: 60/255, green: 60/255, blue: 60/255))
           .cornerRadius(10)
-          .padding(.horizontal)
           .multilineTextAlignment(.center)
           .onReceive(Just(currentGuess)) { value in
             if value.count > 5 {
@@ -58,21 +57,19 @@ struct ContentView: View {
               currentGuess = currentGuess.uppercased()
             }
           }
-      }
-      
-      Button("Check Answer") {
-        vm.checkWord(currentGuess)
-        currentGuess = ""
-      }
-      .font(.headline)
-      .foregroundColor(.white)
-      .frame(height: 55)
-      .frame(maxWidth: .infinity)
-      .background(.teal)
-      .cornerRadius(10)
-      .padding(.horizontal)
-      .padding(.bottom, 10)
-      .disabled(isGuessValid(currentGuess))
+        
+        Button("Check") {
+          vm.checkWord(currentGuess)
+          currentGuess = ""
+        }
+        .font(.headline)
+        .foregroundColor(.white)
+        .frame(height: 55)
+        .frame(maxWidth: .infinity)
+        .background(.teal)
+        .cornerRadius(10)
+        .disabled(isGuessValid(currentGuess))
+      }.padding()
     }.preferredColorScheme(.dark)
   }
 }
