@@ -14,6 +14,7 @@
 		A85C506427BDFA24008EB699 /* WordleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85C506327BDFA24008EB699 /* WordleViewModel.swift */; };
 		A85C506727BDFE54008EB699 /* wordList.json in Resources */ = {isa = PBXBuildFile; fileRef = A85C506627BDFE53008EB699 /* wordList.json */; };
 		A85C506A27BE0A2A008EB699 /* TextBindingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85C506927BE0A2A008EB699 /* TextBindingManager.swift */; };
+		A85C506D27BE1C16008EB699 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85C506C27BE1C16008EB699 /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		A85C506327BDFA24008EB699 /* WordleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordleViewModel.swift; sourceTree = "<group>"; };
 		A85C506627BDFE53008EB699 /* wordList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wordList.json; sourceTree = "<group>"; };
 		A85C506927BE0A2A008EB699 /* TextBindingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBindingManager.swift; sourceTree = "<group>"; };
+		A85C506C27BE1C16008EB699 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,9 +89,18 @@
 		A85C506827BE0A1A008EB699 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				A85C506B27BE1C08008EB699 /* Extenstions */,
 				A85C506927BE0A2A008EB699 /* TextBindingManager.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A85C506B27BE1C08008EB699 /* Extenstions */ = {
+			isa = PBXGroup;
+			children = (
+				A85C506C27BE1C16008EB699 /* StringExtension.swift */,
+			);
+			path = Extenstions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +176,7 @@
 			files = (
 				A85C505727BDF99A008EB699 /* ContentView.swift in Sources */,
 				A85C505527BDF99A008EB699 /* WordleApp.swift in Sources */,
+				A85C506D27BE1C16008EB699 /* StringExtension.swift in Sources */,
 				A85C506A27BE0A2A008EB699 /* TextBindingManager.swift in Sources */,
 				A85C506427BDFA24008EB699 /* WordleViewModel.swift in Sources */,
 			);

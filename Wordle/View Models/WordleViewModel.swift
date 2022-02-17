@@ -6,10 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
 class WordleViewModel: ObservableObject {
   @Published var wordList: [String]?
   @Published var randomWord: String?
+  @Published var remainingAttempts: Int = 5
+  
+  @Published public var guesses: [String] = [""]
   
   init() {
     self.loadWordList()
@@ -34,10 +38,47 @@ class WordleViewModel: ObservableObject {
     randomWord = wordList.randomElement()
   }
   
-  public func isWordCorrect(_ word: String) -> Bool {
+  public func checkWord(_ word: String) -> Void {
     let caseCheckedWord = word.lowercased()
-    guard let caseCheckedRandomWord = randomWord?.lowercased() else { return false }
+    guard let caseCheckedRandomWord = randomWord?.lowercased() else { return }
     
-    return caseCheckedWord == caseCheckedRandomWord
+    if !wordList!.contains(caseCheckedWord) {
+      print("word doesnt exist")
+      return
+    }
+    
+    remainingAttempts -= 1
+    guesses.append(word)
+    
+    if caseCheckedWord == caseCheckedRandomWord {
+      // TODO: Do something that shows that the user has guessed correctly
+    }
+  }
+  
+  private func isLetterCorrect(_ letter: String, _ index: Int) -> Bool {
+    let caseCheckedLetter = letter.uppercased()
+    let caseCheckedLetterFromRandomWord = randomWord?[index].uppercased()
+    
+    return caseCheckedLetter == caseCheckedLetterFromRandomWord
+  }
+  
+  private func isLetterInWord(_ letter: String) -> Bool {
+    let caseCheckedLetter = letter.uppercased()
+    let caseCheckedWord = randomWord?.uppercased()
+    let letterIsInWord = caseCheckedWord?.contains(caseCheckedLetter)
+    
+    return letterIsInWord!
+  }
+  
+  public func getColorForLetter(_ letter: String, _ index: Int) -> Color? {
+    if isLetterCorrect(letter, index) {
+      return Color.green
+    }
+    
+    if isLetterInWord(letter) {
+      return .yellow
+    }
+    
+    return nil
   }
 }
