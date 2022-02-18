@@ -76,6 +76,20 @@ struct ContentView: View {
       .padding([.horizontal, .bottom])
     }
     .preferredColorScheme(.dark)
+    .alert("You won!", isPresented: .constant(vm.gameState == .Won)) {
+      Button("Play again") {
+        vm.pickNewWord()
+      }
+    } message: {
+      Text("You correctly guessed the word!")
+    }
+    .alert("You lost!", isPresented: .constant(vm.gameState == .Lost)) {
+      Button("Play again") {
+        vm.pickNewWord()
+      }
+    } message: {
+      Text("The word was '\(vm.randomWord!.uppercased())'")
+    }
   }
 }
 

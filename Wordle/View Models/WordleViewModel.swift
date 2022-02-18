@@ -13,6 +13,8 @@ class WordleViewModel: ObservableObject {
   @Published var randomWord: String?
   @Published var remainingAttempts: Int = 5
   
+  @Published var gameState: GameState = .InProgress
+  
   @Published public var guesses: [String] = []
   
   init() {
@@ -39,21 +41,29 @@ class WordleViewModel: ObservableObject {
   }
   
   public func checkWord(_ word: String) -> Void {
+    // Convert all comparisons to lowecase
     let caseCheckedWord = word.lowercased()
     guard let caseCheckedRandomWord = randomWord?.lowercased() else { return }
     
+    // If the wordList doesn't contain the caseCheckedWord, exit the function
     if !wordList!.contains(caseCheckedWord) {
       print("word doesnt exist")
       return
     }
     
-    // TODO: Stop word from being added to guess list if remainingAttempts is less than 1
-    
+    // Reduce the number of remaining attempts and add the word to the list of guesses
     remainingAttempts -= 1
     guesses.append(word)
     
+    // If there are less than or equal to 0 remaining attempts, the player has lost the game
+    if remainingAttempts <= 0 {
+      gameState = .Lost
+      return
+    }
+    
+    // If the user has correctly guessed the word, update the gameState
     if caseCheckedWord == caseCheckedRandomWord {
-      // TODO: Do something that shows that the user has guessed correctly
+      gameState = .Won
     }
   }
   
@@ -82,5 +92,13 @@ class WordleViewModel: ObservableObject {
     }
     
     return nil
+  }
+  
+  public func pickNewWord() -> Void {
+    guesses = []
+    remainingAttempts = 5
+    gameState = .InProgress
+    
+    pickRandomWord()
   }
 }
