@@ -57,6 +57,10 @@ class WordleViewModel: ObservableObject {
   private func pickRandomWord() -> Void {
     guard let wordList = wordList else { return }
     randomWord = wordList.randomElement()
+    
+    #if DEBUG
+    print(randomWord!)
+    #endif
   }
   
   public func checkWord(_ word: String) -> Void {
@@ -84,15 +88,16 @@ class WordleViewModel: ObservableObject {
     remainingAttempts -= 1
     guesses.append(word)
     
+    // If the user has correctly guessed the word, update the gameState
+    if caseCheckedWord == caseCheckedRandomWord {
+      gameState = .Won
+      return
+    }
+    
     // If there are less than or equal to 0 remaining attempts, the player has lost the game
     if remainingAttempts <= 0 {
       gameState = .Lost
       return
-    }
-    
-    // If the user has correctly guessed the word, update the gameState
-    if caseCheckedWord == caseCheckedRandomWord {
-      gameState = .Won
     }
   }
   
