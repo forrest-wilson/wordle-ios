@@ -17,6 +17,7 @@
 		A85C506D27BE1C16008EB699 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85C506C27BE1C16008EB699 /* StringExtension.swift */; };
 		A85C507027BE3A8F008EB699 /* LetterBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85C506F27BE3A8F008EB699 /* LetterBox.swift */; };
 		A85C507227BF0852008EB699 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85C507127BF0852008EB699 /* GameState.swift */; };
+		A85C507427C07586008EB699 /* MessageAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85C507327C07586008EB699 /* MessageAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		A85C506C27BE1C16008EB699 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		A85C506F27BE3A8F008EB699 /* LetterBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterBox.swift; sourceTree = "<group>"; };
 		A85C507127BF0852008EB699 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		A85C507327C07586008EB699 /* MessageAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				A85C506F27BE3A8F008EB699 /* LetterBox.swift */,
+				A85C507327C07586008EB699 /* MessageAlert.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 			files = (
 				A85C507227BF0852008EB699 /* GameState.swift in Sources */,
 				A85C505727BDF99A008EB699 /* ContentView.swift in Sources */,
+				A85C507427C07586008EB699 /* MessageAlert.swift in Sources */,
 				A85C505527BDF99A008EB699 /* WordleApp.swift in Sources */,
 				A85C506D27BE1C16008EB699 /* StringExtension.swift in Sources */,
 				A85C506A27BE0A2A008EB699 /* TextBindingManager.swift in Sources */,

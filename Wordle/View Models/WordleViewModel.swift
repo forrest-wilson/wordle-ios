@@ -17,6 +17,25 @@ class WordleViewModel: ObservableObject {
   
   @Published public var guesses: [String] = []
   
+  @Published public var message: String = ""
+  
+  @Published var showMessageAlert: Bool = false {
+    didSet {
+      //
+      // If the showMessageAlert is set to true,
+      // wait for a set number of seconds and then set to false.
+      //
+      // This will ensure UI is temporary
+      //
+
+      if showMessageAlert {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+          self.showMessageAlert = false
+        }
+      }
+    }
+  }
+  
   init() {
     self.loadWordList()
     self.pickRandomWord()
@@ -47,7 +66,8 @@ class WordleViewModel: ObservableObject {
     
     // If the wordList doesn't contain the caseCheckedWord, exit the function
     if !wordList!.contains(caseCheckedWord) {
-      print("word doesnt exist")
+      message = "Word doesn't exist"
+      showMessageAlert = true
       return
     }
     
@@ -84,7 +104,7 @@ class WordleViewModel: ObservableObject {
   
   public func getColorForLetter(_ letter: String, _ index: Int) -> Color? {
     if isLetterCorrect(letter, index) {
-      return Color.green
+      return .green
     }
     
     if isLetterInWord(letter) {

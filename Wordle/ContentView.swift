@@ -20,26 +20,30 @@ struct ContentView: View {
   var body: some View {
     VStack {
       ScrollView {
-        VStack {
-          ForEach(vm.guesses, id: \.self) { guess in
-            HStack {
-              ForEach(0 ..< guess.count, id: \.self) { index in
-                LetterBox(text: guess[index], color: vm.getColorForLetter(guess[index], index))
+        ZStack {
+          VStack {
+            ForEach(vm.guesses, id: \.self) { guess in
+              HStack {
+                ForEach(0 ..< guess.count, id: \.self) { index in
+                  LetterBox(text: guess[index], color: vm.getColorForLetter(guess[index], index))
+                }
               }
+              .padding(.horizontal)
+              .padding(.vertical, 5)
             }
-            .padding(.horizontal)
-            .padding(.vertical, 5)
+            
+            ForEach(0 ..< vm.remainingAttempts, id: \.self) { int in
+              HStack {
+                ForEach(0 ..< 5, id: \.self) { index in
+                  LetterBox(text: "", borderColor: .gray)
+                }
+              }
+              .padding(.horizontal)
+              .padding(.vertical, 5)
+            }
           }
           
-          ForEach(0 ..< vm.remainingAttempts, id: \.self) { int in
-            HStack {
-              ForEach(0 ..< 5, id: \.self) { index in
-                LetterBox(text: "", borderColor: .gray)
-              }
-            }
-            .padding(.horizontal)
-            .padding(.vertical, 5)
-          }
+          MessageAlert(message: vm.message, show: vm.showMessageAlert)
         }
       }
       
