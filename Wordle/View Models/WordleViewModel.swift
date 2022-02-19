@@ -64,7 +64,16 @@ class WordleViewModel: ObservableObject {
     let caseCheckedWord = word.lowercased()
     guard let caseCheckedRandomWord = randomWord?.lowercased() else { return }
     
-    // If the wordList doesn't contain the caseCheckedWord, exit the function
+    // If the word is less than 5 characters,
+    // show a message to the user and exit the function
+    if caseCheckedWord.count < 5 {
+      message = "Word is too short"
+      showMessageAlert = true
+      return
+    }
+    
+    // If the wordList doesn't contain the caseCheckedWord,
+    // show a message to the user and exit the function
     if !wordList!.contains(caseCheckedWord) {
       message = "Word doesn't exist"
       showMessageAlert = true

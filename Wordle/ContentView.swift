@@ -12,10 +12,6 @@ struct ContentView: View {
   @StateObject private var vm = WordleViewModel()
   
   @State private var currentGuess: String = ""
-  
-  private func isGuessValid(_ word: String) -> Bool {
-    return word.count == 4
-  }
 
   var body: some View {
     VStack {
@@ -75,7 +71,6 @@ struct ContentView: View {
         .padding(.horizontal)
         .background(.green)
         .cornerRadius(10)
-        .disabled(isGuessValid(currentGuess))
       }
       .padding([.horizontal, .bottom])
     }
