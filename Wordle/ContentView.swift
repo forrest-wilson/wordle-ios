@@ -37,9 +37,9 @@ struct ContentView: View {
               .padding(.horizontal)
               .padding(.vertical, 5)
             }
-          }
+          }.zIndex(0)
           
-          MessageAlert(message: vm.message, show: $vm.showMessageAlert)
+          MessageAlert(message: vm.message, show: $vm.showMessageAlert).zIndex(1)
         }
       }
       
