@@ -6,12 +6,9 @@
 //
 
 import SwiftUI
-import Combine
 
 struct ContentView: View {
   @StateObject private var vm = WordleViewModel()
-  
-  @State private var currentGuess: String = ""
 
   var body: some View {
     VStack {
@@ -43,38 +40,7 @@ struct ContentView: View {
         }
       }
       
-      Text("\(vm.remainingAttempts) attempts remaining")
-      
-      HStack {
-        TextField("Type guess here", text: $currentGuess)
-          .font(.headline)
-          .frame(height: 55)
-          .frame(maxWidth: .infinity)
-          .background(Color(red: 60/255, green: 60/255, blue: 60/255))
-          .cornerRadius(10)
-          .multilineTextAlignment(.center)
-          .onReceive(Just(currentGuess)) { value in
-            if value.count > 5 {
-              currentGuess.removeLast()
-            } else {
-              currentGuess = currentGuess.uppercased()
-            }
-          }
-        
-        Button("Check") {
-          withAnimation {
-            vm.checkWord(currentGuess)
-            currentGuess = ""
-          }
-        }
-        .font(.headline)
-        .foregroundColor(.white)
-        .frame(height: 55)
-        .padding(.horizontal)
-        .background(.green)
-        .cornerRadius(10)
-      }
-      .padding([.horizontal, .bottom])
+      GuessInputView()
     }
     .preferredColorScheme(.dark)
     .alert("You won!", isPresented: .constant(vm.gameState == .Won)) {
@@ -91,9 +57,7 @@ struct ContentView: View {
     } message: {
       Text("The word was '\(vm.randomWord?.uppercased() ?? "")'")
     }
-    .onAppear {
-      vm.pickNewWord()
-    }
+    .environmentObject(vm)
   }
 }
 

@@ -14,15 +14,15 @@ class WordleViewModel: ObservableObject {
   @Published var remainingAttempts: Int = 5
   @Published var gameState: GameState = .InProgress
   @Published var guesses: [String] = []
+  @Published var currentGuess: String = ""
   
   // Popup state
   @Published var message: String = ""
   @Published var showMessageAlert: Bool = false
   
   init() {
-    if self.wordList.isEmpty {
-      self.loadWordList()
-    }
+    self.loadWordList()
+    self.pickRandomWord()
   }
   
   private func loadWordList() -> Void {
@@ -32,6 +32,10 @@ class WordleViewModel: ObservableObject {
         let jsonResult = try JSONSerialization.jsonObject(with: data, options: []) as! [String]
         
         wordList = jsonResult
+        
+        #if DEBUG
+        print("word list loaded")
+        #endif
       } catch {
         print("Error while attempting to parse JSON file")
       }
@@ -42,7 +46,7 @@ class WordleViewModel: ObservableObject {
     randomWord = wordList.randomElement()
     
     #if DEBUG
-    print(randomWord!)
+    print("\(randomWord ?? "") is random word")
     #endif
   }
   
@@ -64,7 +68,10 @@ class WordleViewModel: ObservableObject {
   public func checkWord(_ word: String) -> Void {
     // Convert all comparisons to lowecase
     let caseCheckedWord = word.lowercased()
-    guard let caseCheckedRandomWord = randomWord?.lowercased() else { return }
+    guard let caseCheckedRandomWord = randomWord?.lowercased() else {
+      print("error")
+      return
+    }
     
     // If the word is less than 5 characters,
     // show a message to the user and exit the function

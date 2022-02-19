@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct MessageAlert: View {
-  @StateObject var vm = WordleViewModel()
-  
   var message: String
 
   @Binding var show: Bool
