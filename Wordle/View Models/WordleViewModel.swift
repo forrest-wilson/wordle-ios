@@ -5,7 +5,6 @@
 //  Created by Forrest Wilson-Jennings on 17/02/22.
 //
 
-import Foundation
 import SwiftUI
 
 class WordleViewModel: ObservableObject {
