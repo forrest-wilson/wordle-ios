@@ -14,7 +14,8 @@ struct LetterBoxView: View {
 
   var body: some View {
     Text(text)
-      .font(.headline)
+      .font(.title2)
+      .fontWeight(.bold)
       .padding()
       .frame(minWidth: 0, maxWidth: .infinity)
       .frame(height: 60)

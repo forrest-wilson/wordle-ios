@@ -10,7 +10,7 @@ import SwiftUI
 class WordleViewModel: ObservableObject {
   @Published var wordList: [String] = []
   @Published var randomWord: String?
-  @Published var remainingAttempts: Int = 5
+  @Published var remainingAttempts: Int
   @Published var gameState: GameState = .InProgress
   @Published var guesses: [String] = []
   @Published var currentGuess: String = ""
@@ -19,7 +19,11 @@ class WordleViewModel: ObservableObject {
   @Published var message: String = ""
   @Published var showMessageAlert: Bool = false
   
+  private let maxAttempts: Int = 6
+  
   init() {
+    self.remainingAttempts = self.maxAttempts
+    
     self.loadWordList()
     self.pickRandomWord()
   }
@@ -122,7 +126,7 @@ class WordleViewModel: ObservableObject {
   
   public func pickNewWord() -> Void {
     guesses = []
-    remainingAttempts = 5
+    remainingAttempts = maxAttempts
     gameState = .InProgress
     
     pickRandomWord()
