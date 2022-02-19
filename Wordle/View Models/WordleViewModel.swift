@@ -9,36 +9,20 @@ import Foundation
 import SwiftUI
 
 class WordleViewModel: ObservableObject {
-  @Published var wordList: [String]?
+  @Published var wordList: [String] = []
   @Published var randomWord: String?
   @Published var remainingAttempts: Int = 5
-  
   @Published var gameState: GameState = .InProgress
+  @Published var guesses: [String] = []
   
-  @Published public var guesses: [String] = []
-  
-  @Published public var message: String = ""
-  
-  @Published var showMessageAlert: Bool = false {
-    didSet {
-      //
-      // If the showMessageAlert is set to true,
-      // wait for a set number of seconds and then set to false.
-      //
-      // This will ensure UI is temporary
-      //
-
-      if showMessageAlert {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-          self.showMessageAlert = false
-        }
-      }
-    }
-  }
+  // Popup state
+  @Published var message: String = ""
+  @Published var showMessageAlert: Bool = false
   
   init() {
-    self.loadWordList()
-    self.pickRandomWord()
+    if self.wordList.isEmpty {
+      self.loadWordList()
+    }
   }
   
   private func loadWordList() -> Void {
@@ -55,12 +39,26 @@ class WordleViewModel: ObservableObject {
   }
   
   private func pickRandomWord() -> Void {
-    guard let wordList = wordList else { return }
     randomWord = wordList.randomElement()
     
     #if DEBUG
     print(randomWord!)
     #endif
+  }
+  
+  private func isLetterCorrect(_ letter: String, _ index: Int) -> Bool {
+    let caseCheckedLetter = letter.uppercased()
+    let caseCheckedLetterFromRandomWord = randomWord?[index].uppercased()
+    
+    return caseCheckedLetter == caseCheckedLetterFromRandomWord
+  }
+  
+  private func isLetterInWord(_ letter: String) -> Bool {
+    let caseCheckedLetter = letter.uppercased()
+    let caseCheckedWord = randomWord?.uppercased()
+    let letterIsInWord = caseCheckedWord?.contains(caseCheckedLetter)
+    
+    return letterIsInWord!
   }
   
   public func checkWord(_ word: String) -> Void {
@@ -78,7 +76,7 @@ class WordleViewModel: ObservableObject {
     
     // If the wordList doesn't contain the caseCheckedWord,
     // show a message to the user and exit the function
-    if !wordList!.contains(caseCheckedWord) {
+    if !wordList.contains(caseCheckedWord) {
       message = "Word doesn't exist"
       showMessageAlert = true
       return
@@ -99,21 +97,6 @@ class WordleViewModel: ObservableObject {
       gameState = .Lost
       return
     }
-  }
-  
-  private func isLetterCorrect(_ letter: String, _ index: Int) -> Bool {
-    let caseCheckedLetter = letter.uppercased()
-    let caseCheckedLetterFromRandomWord = randomWord?[index].uppercased()
-    
-    return caseCheckedLetter == caseCheckedLetterFromRandomWord
-  }
-  
-  private func isLetterInWord(_ letter: String) -> Bool {
-    let caseCheckedLetter = letter.uppercased()
-    let caseCheckedWord = randomWord?.uppercased()
-    let letterIsInWord = caseCheckedWord?.contains(caseCheckedLetter)
-    
-    return letterIsInWord!
   }
   
   public func getColorForLetter(_ letter: String, _ index: Int) -> Color? {

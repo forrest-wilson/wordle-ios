@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct MessageAlert: View {
+  @StateObject var vm = WordleViewModel()
+  
   var message: String
-  var durationInSeconds: Double? = 3 // Duration in seconds
-  var show: Bool
+
+  @Binding var show: Bool
   
   var body: some View {
     if show {
       Text(message)
         .font(.headline)
-        .background(.white)
         .foregroundColor(.black)
         .padding()
         .frame(minWidth: 100)
@@ -24,12 +25,19 @@ struct MessageAlert: View {
         .background(.white)
         .cornerRadius(10)
         .shadow(color: .gray, radius: 100)
+        .onAppear {
+          DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+            withAnimation {
+              self.show = false
+            }
+          }
+        }
     }
   }
 }
 
 struct MessageAlert_Preview: PreviewProvider {
   static var previews: some View {
-    MessageAlert(message: "Message", show: true)
+    MessageAlert(message: "Message", show: .constant(true))
   }
 }

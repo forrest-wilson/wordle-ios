@@ -39,7 +39,7 @@ struct ContentView: View {
             }
           }
           
-          MessageAlert(message: vm.message, show: vm.showMessageAlert)
+          MessageAlert(message: vm.message, show: $vm.showMessageAlert)
         }
       }
       
@@ -62,8 +62,10 @@ struct ContentView: View {
           }
         
         Button("Check") {
-          vm.checkWord(currentGuess)
-          currentGuess = ""
+          withAnimation {
+            vm.checkWord(currentGuess)
+            currentGuess = ""
+          }
         }
         .font(.headline)
         .foregroundColor(.white)
@@ -87,7 +89,10 @@ struct ContentView: View {
         vm.pickNewWord()
       }
     } message: {
-      Text("The word was '\(vm.randomWord!.uppercased())'")
+      Text("The word was '\(vm.randomWord?.uppercased() ?? "")'")
+    }
+    .onAppear {
+      vm.pickNewWord()
     }
   }
 }
