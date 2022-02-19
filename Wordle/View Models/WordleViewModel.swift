@@ -67,10 +67,7 @@ class WordleViewModel: ObservableObject {
   public func checkWord(_ word: String) -> Void {
     // Convert all comparisons to lowecase
     let caseCheckedWord = word.lowercased()
-    guard let caseCheckedRandomWord = randomWord?.lowercased() else {
-      print("error")
-      return
-    }
+    guard let caseCheckedRandomWord = randomWord?.lowercased() else { return }
     
     // If the word is less than 5 characters,
     // show a message to the user and exit the function
@@ -83,14 +80,20 @@ class WordleViewModel: ObservableObject {
     // If the wordList doesn't contain the caseCheckedWord,
     // show a message to the user and exit the function
     if !wordList.contains(caseCheckedWord) {
-      message = "Word doesn't exist"
+      message = "Word not in list"
+      showMessageAlert = true
+      return
+    }
+    
+    if guesses.contains(caseCheckedWord) {
+      message = "You've already guessed that word"
       showMessageAlert = true
       return
     }
     
     // Reduce the number of remaining attempts and add the word to the list of guesses
     remainingAttempts -= 1
-    guesses.append(word)
+    guesses.append(word.lowercased())
     
     // If the user has correctly guessed the word, update the gameState
     if caseCheckedWord == caseCheckedRandomWord {

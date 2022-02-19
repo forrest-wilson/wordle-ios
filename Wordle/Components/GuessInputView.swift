@@ -11,6 +11,9 @@ import Combine
 struct GuessInputView: View {
   @EnvironmentObject var vm: WordleViewModel
   
+  private var frameHeight: CGFloat = 50
+  private var cornerRadius: CGFloat = 10
+  
   var body: some View {
     VStack {
       Text("\(vm.remainingAttempts) attempts remaining")
@@ -18,10 +21,9 @@ struct GuessInputView: View {
       HStack {
         TextField("Type guess here", text: $vm.currentGuess)
           .font(.headline)
-          .frame(height: 55)
-          .frame(maxWidth: .infinity)
+          .frame(height: frameHeight)
           .background(Color(red: 60/255, green: 60/255, blue: 60/255))
-          .cornerRadius(10)
+          .cornerRadius(cornerRadius)
           .multilineTextAlignment(.center)
           .disableAutocorrection(true)
           .onReceive(Just(vm.currentGuess)) { value in
@@ -38,10 +40,10 @@ struct GuessInputView: View {
         }
         .font(.headline)
         .foregroundColor(.white)
-        .frame(height: 55)
+        .frame(height: frameHeight)
         .padding(.horizontal)
         .background(.green)
-        .cornerRadius(10)
+        .cornerRadius(cornerRadius)
       }
       .padding([.horizontal, .bottom])
     }
