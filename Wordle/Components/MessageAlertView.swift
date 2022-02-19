@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MessageAlert: View {
+struct MessageAlertView: View {
   var message: String
 
   @Binding var show: Bool
@@ -36,6 +36,6 @@ struct MessageAlert: View {
 
 struct MessageAlert_Preview: PreviewProvider {
   static var previews: some View {
-    MessageAlert(message: "This is a message", show: .constant(true))
+    MessageAlertView(message: "This is a message", show: .constant(true))
   }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LetterBox: View {
+struct LetterBoxView: View {
   var text: String
   var color: Color?
   var borderColor: Color = .white
@@ -29,7 +29,7 @@ struct LetterBox: View {
 
 struct LetterBox_Previews: PreviewProvider {
   static var previews: some View {
-    LetterBox(text: "Default Text", color: .clear)
+    LetterBoxView(text: "Default Text", color: .clear)
       .preferredColorScheme(.dark)
   }
 }

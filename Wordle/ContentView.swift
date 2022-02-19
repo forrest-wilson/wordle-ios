@@ -18,7 +18,7 @@ struct ContentView: View {
             ForEach(vm.guesses, id: \.self) { guess in
               HStack {
                 ForEach(0 ..< guess.count, id: \.self) { index in
-                  LetterBox(text: guess[index].uppercased(), color: vm.getColorForLetter(guess[index], index))
+                  LetterBoxView(text: guess[index].uppercased(), color: vm.getColorForLetter(guess[index], index))
                 }
               }
               .padding(.horizontal)
@@ -28,7 +28,7 @@ struct ContentView: View {
             ForEach(0 ..< vm.remainingAttempts, id: \.self) { int in
               HStack {
                 ForEach(0 ..< 5, id: \.self) { index in
-                  LetterBox(text: "", borderColor: .gray)
+                  LetterBoxView(text: "", borderColor: .gray)
                 }
               }
               .padding(.horizontal)
@@ -36,7 +36,7 @@ struct ContentView: View {
             }
           }.zIndex(0)
           
-          MessageAlert(message: vm.message, show: $vm.showMessageAlert).zIndex(1)
+          MessageAlertView(message: vm.message, show: $vm.showMessageAlert).zIndex(1)
         }
       }
       
