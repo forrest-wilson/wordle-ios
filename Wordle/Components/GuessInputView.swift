@@ -23,6 +23,7 @@ struct GuessInputView: View {
           .background(Color(red: 60/255, green: 60/255, blue: 60/255))
           .cornerRadius(10)
           .multilineTextAlignment(.center)
+          .disableAutocorrection(true)
           .onReceive(Just(vm.currentGuess)) { value in
             if value.count > 5 {
               vm.currentGuess.removeLast()
