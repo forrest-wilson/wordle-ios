@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct WordleView: View {
   @StateObject private var vm = WordleViewModel()
 
   var body: some View {
@@ -76,6 +76,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    WordleView()
   }
 }
