@@ -68,6 +68,28 @@ class WordleViewModel: ObservableObject {
     return letterIsInWord!
   }
   
+  private func isLetterGuessed(_ letter: String) -> Bool {
+    let allCharacters: String = guesses.reduce("") { sum, guess in
+      return sum + guess.uppercased()
+    }
+    
+    return allCharacters.contains(letter.uppercased())
+  }
+  
+  private func isLetterInCorrectPlace(_ letter: String) -> Bool {
+    var correctInstances: [Bool] = []
+
+    for guess in guesses {
+      guard let i = randomWord?.firstIndex(of: Character(letter.lowercased())) else { continue }
+
+      correctInstances.append(guess[i].uppercased() == letter.uppercased())
+    }
+    
+    return correctInstances.contains { instance in
+      return instance
+    }
+  }
+  
   public func checkWord(_ word: String) -> Void {
     // Convert all comparisons to lowecase
     let caseCheckedWord = word.lowercased()
@@ -95,9 +117,12 @@ class WordleViewModel: ObservableObject {
       return
     }
     
-    // Reduce the number of remaining attempts and add the word to the list of guesses
+    // Reduce the number of remaining attempts,
+    // add the word to the list of guesses,
+    // and set the current guess to an empty string
     remainingAttempts -= 1
     guesses.append(word.lowercased())
+    currentGuess = ""
     
     // If the user has correctly guessed the word, update the gameState
     if caseCheckedWord == caseCheckedRandomWord {
@@ -124,11 +149,35 @@ class WordleViewModel: ObservableObject {
     return nil
   }
   
+  public func getColorForKeyboardLetter(_ letter: String) -> Color? {
+    var color: Color = .gray
+    
+    if isLetterGuessed(letter) {
+      color = Color(.sRGB, red: 50/255, green: 50/255, blue: 50/255, opacity: 1)
+      
+      if isLetterInWord(letter) {
+        color = .yellow
+        
+        if isLetterInCorrectPlace(letter) {
+          color = .green
+        }
+      }
+    }
+    
+    return color
+  }
+  
   public func pickNewWord() -> Void {
     guesses = []
     remainingAttempts = maxAttempts
     gameState = .InProgress
     
     pickRandomWord()
+  }
+  
+  public func backspace() -> Void {
+    if !currentGuess.isEmpty {
+      currentGuess.removeLast()
+    }
   }
 }

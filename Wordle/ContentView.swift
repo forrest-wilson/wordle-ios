@@ -25,7 +25,20 @@ struct ContentView: View {
               .padding(.vertical, 5)
             }
             
-            ForEach(0 ..< vm.remainingAttempts, id: \.self) { int in
+            if vm.remainingAttempts != 0 {
+              HStack {
+                ForEach(0 ..< 5, id: \.self) { index in
+                  LetterBoxView(
+                    text: index >= vm.currentGuess.count ? "" : vm.currentGuess[index],
+                    borderColor: .gray
+                  )
+                }
+              }
+              .padding(.horizontal)
+              .padding(.vertical, 5)
+            }
+            
+            ForEach(0 ..< (vm.remainingAttempts <= 1 ? 0 : vm.remainingAttempts - 1), id: \.self) { int in
               HStack {
                 ForEach(0 ..< 5, id: \.self) { index in
                   LetterBoxView(text: "", borderColor: .gray)
@@ -40,7 +53,7 @@ struct ContentView: View {
         }
       }
       
-      GuessInputView()
+      KeyboardView()
     }
     .preferredColorScheme(.dark)
     .alert("You won!", isPresented: .constant(vm.gameState == .Won)) {
