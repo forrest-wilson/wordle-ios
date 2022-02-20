@@ -14,6 +14,13 @@ struct GuessInputView: View {
   private var frameHeight: CGFloat = 50
   private var cornerRadius: CGFloat = 10
   
+  private func submitGuess() -> Void {
+    withAnimation {
+      vm.checkWord(vm.currentGuess)
+      vm.currentGuess = ""
+    }
+  }
+  
   var body: some View {
     VStack {
       Text("\(vm.remainingAttempts) attempts remaining")
@@ -31,12 +38,12 @@ struct GuessInputView: View {
               vm.currentGuess.removeLast()
             }
           }
+          .onSubmit {
+            submitGuess()
+          }
 
         Button("Check") {
-          withAnimation {
-            vm.checkWord(vm.currentGuess)
-            vm.currentGuess = ""
-          }
+          submitGuess()
         }
         .font(.headline)
         .foregroundColor(.white)
@@ -53,5 +60,7 @@ struct GuessInputView: View {
 struct GuessInput_Preview: PreviewProvider {
   static var previews: some View {
     GuessInputView()
+      .environmentObject(WordleViewModel())
+      .preferredColorScheme(.dark)
   }
 }
