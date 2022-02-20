@@ -67,11 +67,11 @@
 		A85C505327BDF99A008EB699 /* Wordle */ = {
 			isa = PBXGroup;
 			children = (
-				A8A6DF7627C2E36E00A2A4F5 /* Views */,
-				A85C506E27BE3A85008EB699 /* Components */,
+				A8A6DF7727C2E41900A2A4F5 /* Data */,
 				A85C506827BE0A1A008EB699 /* Helpers */,
-				A85C506627BDFE53008EB699 /* wordList.json */,
 				A85C506227BDFA17008EB699 /* View Models */,
+				A85C506E27BE3A85008EB699 /* Components */,
+				A8A6DF7627C2E36E00A2A4F5 /* Views */,
 				A85C505427BDF99A008EB699 /* WordleApp.swift */,
 				A85C505827BDF99B008EB699 /* Assets.xcassets */,
 				A85C505A27BDF99B008EB699 /* Preview Content */,
@@ -137,6 +137,14 @@
 				A85C505627BDF99A008EB699 /* WordleView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A8A6DF7727C2E41900A2A4F5 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A85C506627BDFE53008EB699 /* wordList.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
