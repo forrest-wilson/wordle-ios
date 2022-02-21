@@ -63,7 +63,8 @@ struct WordleView: View {
       
       if vm.gameState == .Won {
         AlertView(
-          message: "You won!"
+          message: "You won!",
+          word: vm.randomWord
         ) {
           withAnimation {
             vm.pickNewWord()
@@ -72,7 +73,12 @@ struct WordleView: View {
       }
       
       if vm.gameState == .Lost {
-        AlertView(message: "You lost!", icon: "xmark.circle.fill", iconColor: .red) {
+        AlertView(
+          message: "You lost!",
+          word: vm.randomWord,
+          icon: "xmark.circle.fill",
+          iconColor: .red
+        ) {
           withAnimation {
             vm.pickNewWord()
           }

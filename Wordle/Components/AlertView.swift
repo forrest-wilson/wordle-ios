@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AlertView: View {
   var message: String
+  var word: String?
   var icon: String = "checkmark.circle.fill"
   var iconColor: Color = .green
   var closure: () -> Void
@@ -22,12 +23,24 @@ struct AlertView: View {
           .resizable()
           .frame(width: 50, height: 50)
           .padding(.top, 10)
-          .padding(.bottom)
           .foregroundColor(iconColor)
         
         Text(message)
           .foregroundColor(.white)
-          .padding(.bottom)
+          .font(.title)
+          .fontWeight(.bold)
+        
+        if word != nil {
+          Text("The word was:")
+            .fontWeight(.light)
+            .padding(.bottom, 5)
+          
+          Text(word!.uppercased())
+            .font(.title)
+            .fontWeight(.bold)
+        }
+        
+        Divider()
         
         Text("Current score: \(state.currentScore)")
         Text("Highest score: \(state.highestScore)")
@@ -63,9 +76,13 @@ struct AlertView: View {
 
 struct AlertView_Preview: PreviewProvider {
   static var previews: some View {
-    AlertView(message: "This is a message") {
+    AlertView(
+      message: "You won!",
+      word: "apple"
+    ) {
       print("Hello")
     }
       .preferredColorScheme(.dark)
+.previewInterfaceOrientation(.portrait)
   }
 }
