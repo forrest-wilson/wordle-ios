@@ -21,6 +21,8 @@ class WordleViewModel: ObservableObject {
   
   private let maxAttempts: Int = 6
   
+  private var state = UserDefaultsViewModel()
+  
   init() {
     self.remainingAttempts = self.maxAttempts
     
@@ -127,6 +129,7 @@ class WordleViewModel: ObservableObject {
     // If the user has correctly guessed the word, update the gameState
     if caseCheckedWord == caseCheckedRandomWord {
       gameState = .Won
+      state.gameWon()
       return
     }
     
@@ -168,6 +171,10 @@ class WordleViewModel: ObservableObject {
   }
   
   public func pickNewWord() -> Void {
+    if gameState == .Lost {
+      state.currentScore = 0
+    }
+    
     guesses = []
     remainingAttempts = maxAttempts
     gameState = .InProgress

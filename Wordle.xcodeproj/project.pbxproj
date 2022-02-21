@@ -19,6 +19,8 @@
 		A85C507027BE3A8F008EB699 /* LetterBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85C506F27BE3A8F008EB699 /* LetterBoxView.swift */; };
 		A85C507227BF0852008EB699 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85C507127BF0852008EB699 /* GameState.swift */; };
 		A85C507427C07586008EB699 /* MessageAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85C507327C07586008EB699 /* MessageAlertView.swift */; };
+		A8A6DF7C27C2F28300A2A4F5 /* UserDefaultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A6DF7B27C2F28300A2A4F5 /* UserDefaultsViewModel.swift */; };
+		A8A6DF7E27C3128000A2A4F5 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A6DF7D27C3128000A2A4F5 /* AlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		A85C506F27BE3A8F008EB699 /* LetterBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterBoxView.swift; sourceTree = "<group>"; };
 		A85C507127BF0852008EB699 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		A85C507327C07586008EB699 /* MessageAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAlertView.swift; sourceTree = "<group>"; };
+		A8A6DF7B27C2F28300A2A4F5 /* UserDefaultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsViewModel.swift; sourceTree = "<group>"; };
+		A8A6DF7D27C3128000A2A4F5 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				A85C506327BDFA24008EB699 /* WordleViewModel.swift */,
+				A8A6DF7B27C2F28300A2A4F5 /* UserDefaultsViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 				A85C507327C07586008EB699 /* MessageAlertView.swift */,
 				A81E92E527C20C730087B9F6 /* KeyboardButtonView.swift */,
 				A81E92E727C20D500087B9F6 /* KeyboardView.swift */,
+				A8A6DF7D27C3128000A2A4F5 /* AlertView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -221,8 +227,10 @@
 				A85C507227BF0852008EB699 /* GameState.swift in Sources */,
 				A81E92E627C20C730087B9F6 /* KeyboardButtonView.swift in Sources */,
 				A85C505727BDF99A008EB699 /* WordleView.swift in Sources */,
+				A8A6DF7E27C3128000A2A4F5 /* AlertView.swift in Sources */,
 				A85C507427C07586008EB699 /* MessageAlertView.swift in Sources */,
 				A81E92E827C20D500087B9F6 /* KeyboardView.swift in Sources */,
+				A8A6DF7C27C2F28300A2A4F5 /* UserDefaultsViewModel.swift in Sources */,
 				A85C505527BDF99A008EB699 /* WordleApp.swift in Sources */,
 				A85C506D27BE1C16008EB699 /* StringExtension.swift in Sources */,
 				A85C506427BDFA24008EB699 /* WordleViewModel.swift in Sources */,

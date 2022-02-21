@@ -45,14 +45,14 @@ struct KeyboardView: View {
       
       HStack(spacing: 2) {
         KeyboardButtonView(
-          letter: "ENTER",
+          icon: "return",
           color: .green
         ) { _ in
           withAnimation {
             vm.checkWord(vm.currentGuess)
           }
         }
-          .frame(minWidth: 65)
+          .frame(minWidth: 50)
 
         ForEach(0 ..< bottomRow.count) { index in
           KeyboardButtonView(
@@ -62,10 +62,10 @@ struct KeyboardView: View {
           )
         }
         
-        KeyboardButtonView(icon: "xmark.square") { _ in
+        KeyboardButtonView(icon: "delete.backward") { _ in
           vm.backspace()
         }
-          .frame(minWidth: 65)
+          .frame(minWidth: 50)
       }
     }
     .padding(.bottom)
